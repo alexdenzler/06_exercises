@@ -12,7 +12,7 @@ output:
 
 
 ```{r setup, include=FALSE}
-#knitr::opts_chunk$set(echo = TRUE, error=TRUE, message=FALSE, warning=FALSE)
+knitr::opts_chunk$set(echo = TRUE, error=TRUE, message=FALSE, warning=FALSE)
 ```
 
 ```{r libraries}
@@ -73,11 +73,58 @@ Once your repository is created, you should always open your **project** rather 
 
 ## Your first `shiny` app 
 
-  1. This app will also use the COVID data. Make sure you load that data and all the libraries you need in the `app.R` file you create. Below, you will post a link to the app that you publish on shinyapps.io. You will create an app to compare states' cumulative number of COVID cases over time. The x-axis will be number of days since 20+ cases and the y-axis will be cumulative cases on the log scale (`scale_y_log10()`). We use number of days since 20+ cases on the x-axis so we can make better comparisons of the curve trajectories. You will have an input box where the user can choose which states to compare (`selectInput()`) and have a submit button to click once the user has chosen all states they're interested in comparing. The graph should display a different line for each state, with labels either on the graph or in a legend. Color can be used if needed. 
+  1. This app will also use the COVID data. Make sure you load that data and all the libraries you need in the `app.R` file you create. Below, you will post a link to the app that you publish on shinyapps.io. You will create an app to compare states' cumulative number of COVID cases over time. The x-axis will be number of days since 20+ cases and the y-axis will be cumulative cases on the log scale (`scale_y_log10()`). We use number of days since 20+ cases on the x-axis so we can make better comparisons of the curve trajectories. You will have an input box where the user can choose which states to compare (`selectInput()`) and have a submit button to click once the user has chosen all states they're interested in comparing. The graph should display  a different line for each state, with labels either on the graph or in a legend. Color can be used if needed.
+
+```{r}
+covid192 <- covid19 %>% 
+  as.list(date)
+```
+
+
+```{r}
+# ui <- fluidPage(
+#   selectInput(inputId = "dates",
+#               label = "Date:",
+#               choices = list(date)),
+#   plotOutput(outputId = "covidTime")
+# )
+# server <- function(input, output) {
+#   output$covidTime <- renderPlot({
+#   covid19 %>% 
+#     group_by(state) %>% 
+#     mutate(totalCases = cumsum(cases)) %>% 
+#     filter(totalCases >= 20) %>% 
+#     mutate(daysSince = as.numeric(difftime(date, lag(date, 1))), 
+#            Between = ifelse(is.na(daysSince), 0, daysSince), 
+#            daysSince20 = cumsum(as.numeric(Between))) %>% 
+#     select(-daysSince, -Between) %>% 
+#     filter(state == input$state, 
+#            daysSince20 == input$daysSince20, 
+#            totalCases == input$totalCases) %>% 
+#     ggplot(aes(x = input$daysSince20, y = input$totalCases, 
+#                color = input$state)) + 
+#     geom_line() + 
+#     scale_y_log10() + 
+#     scale_x_discrete() + 
+#     labs(title = "Days Since 20 Cumulative Covid Cases by State",
+#          x = "Days Since 20 Cases",
+#          y = "Total Cases",
+#          color = "State")
+#     })
+# }
+# shinyApp(ui = ui, server = server)
+```
+  
   
 ## Warm-up exercises from tutorial
 
   2. Read in the fake garden harvest data. Find the data [here](https://github.com/llendway/scraping_etc/blob/main/2020_harvest.csv) and click on the `Raw` button to get a direct link to the data. 
+  
+```{r}
+fake_harvest <- read_csv("https://raw.githubusercontent.com/llendway/scraping_etc/main/2020_harvest.csv", 
+    col_types = cols(X1 = col_skip(), weight = col_number()), 
+    na = "MISSING", skip = 2)
+```
   
   3. Read in this [data](https://www.kaggle.com/heeraldedhia/groceries-dataset) from the kaggle website. You will need to download the data first. Save it to your project/repo folder. Do some quick checks of the data to assure it has been read in appropriately.
 
@@ -91,10 +138,57 @@ colors = scales::col_numeric(
 ```
 
 
-
   5. Create a table using `gt` with data from your project or from the `garden_harvest` data if your project data aren't ready.
   
+```{r}
+tab1 <- garden_harvest %>% gt(
+  rowname_col = "date",
+  groupname_col = "vegetable"
+) %>% 
+  fmt_date(columns = vars(date),
+           date_style = 4) %>% 
+  cols_hide(columns = vars(units)) %>% 
+  tab_footnote(
+    footnote = "Weight in grams",
+    locations = cells_column_labels(
+      columns = vars(weight)
+    )
+  ) %>% 
+  tab_header(title = "Lisa's Garden Harvest Data") %>% 
+  tab_options(column_labels.background.color = "lightblue",
+              )
+  
+  
+tab1
+```
+  
+  
   6. Use `patchwork` operators and functions to combine at least two graphs using your project data or `garden_harvest` data if your project data aren't read.
+
+```{r, fig.width = 12}
+garden_harvestL <- garden_harvest %>% 
+  filter(vegetable %in% "lettuce")
+
+lettuce <- garden_harvestL %>% 
+  ggplot(aes(y = fct_rev(fct_infreq(variety)))) + 
+  geom_bar(fill = "green4", color = "black") +
+  labs(title = "Frequency of Lettuce Harvest by Variety",
+       x = "Count",
+       y = "Variety")
+
+garden_harvestT <- garden_harvest %>% 
+  filter(vegetable == "tomatoes")
+
+tomato <- garden_harvestT %>% 
+  ggplot(aes(y = fct_rev(fct_infreq(variety)))) + 
+  geom_bar(fill = "red4", color = "black") +
+  labs(title = "Frequency of Tomatoes Harvest by Variety",
+       x = "Count",
+       y = "Variety")
+
+lettuce | tomato
+```
+
   
   7. COMING SOON! Web scraping problem.
 
