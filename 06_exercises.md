@@ -74,48 +74,7 @@ Once your repository is created, you should always open your **project** rather 
 
   1. This app will also use the COVID data. Make sure you load that data and all the libraries you need in the `app.R` file you create. Below, you will post a link to the app that you publish on shinyapps.io. You will create an app to compare states' cumulative number of COVID cases over time. The x-axis will be number of days since 20+ cases and the y-axis will be cumulative cases on the log scale (`scale_y_log10()`). We use number of days since 20+ cases on the x-axis so we can make better comparisons of the curve trajectories. You will have an input box where the user can choose which states to compare (`selectInput()`) and have a submit button to click once the user has chosen all states they're interested in comparing. The graph should display  a different line for each state, with labels either on the graph or in a legend. Color can be used if needed.
 
-
-```r
-covid192 <- covid19 %>% 
-  as.list(date)
-```
-
-
-
-```r
-# ui <- fluidPage(
-#   selectInput(inputId = "dates",
-#               label = "Date:",
-#               choices = list(date)),
-#   plotOutput(outputId = "covidTime")
-# )
-# server <- function(input, output) {
-#   output$covidTime <- renderPlot({
-#   covid19 %>% 
-#     group_by(state) %>% 
-#     mutate(totalCases = cumsum(cases)) %>% 
-#     filter(totalCases >= 20) %>% 
-#     mutate(daysSince = as.numeric(difftime(date, lag(date, 1))), 
-#            Between = ifelse(is.na(daysSince), 0, daysSince), 
-#            daysSince20 = cumsum(as.numeric(Between))) %>% 
-#     select(-daysSince, -Between) %>% 
-#     filter(state == input$state, 
-#            daysSince20 == input$daysSince20, 
-#            totalCases == input$totalCases) %>% 
-#     ggplot(aes(x = input$daysSince20, y = input$totalCases, 
-#                color = input$state)) + 
-#     geom_line() + 
-#     scale_y_log10() + 
-#     scale_x_discrete() + 
-#     labs(title = "Days Since 20 Cumulative Covid Cases by State",
-#          x = "Days Since 20 Cases",
-#          y = "Total Cases",
-#          color = "State")
-#     })
-# }
-# shinyApp(ui = ui, server = server)
-```
-  
+  [https://adenzler.shinyapps.io/06_exercises/](https://adenzler.shinyapps.io/06_exercises/)
   
 ## Warm-up exercises from tutorial
 
@@ -170,7 +129,7 @@ tab1
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#ayympwigio .gt_table {
+#lciyvgxirb .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -195,7 +154,7 @@ tab1
   border-left-color: #D3D3D3;
 }
 
-#ayympwigio .gt_heading {
+#lciyvgxirb .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -207,7 +166,7 @@ tab1
   border-right-color: #D3D3D3;
 }
 
-#ayympwigio .gt_title {
+#lciyvgxirb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -217,7 +176,7 @@ tab1
   border-bottom-width: 0;
 }
 
-#ayympwigio .gt_subtitle {
+#lciyvgxirb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -227,13 +186,13 @@ tab1
   border-top-width: 0;
 }
 
-#ayympwigio .gt_bottom_border {
+#lciyvgxirb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ayympwigio .gt_col_headings {
+#lciyvgxirb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -248,7 +207,7 @@ tab1
   border-right-color: #D3D3D3;
 }
 
-#ayympwigio .gt_col_heading {
+#lciyvgxirb .gt_col_heading {
   color: #333333;
   background-color: lightblue;
   font-size: 100%;
@@ -268,7 +227,7 @@ tab1
   overflow-x: hidden;
 }
 
-#ayympwigio .gt_column_spanner_outer {
+#lciyvgxirb .gt_column_spanner_outer {
   color: #333333;
   background-color: lightblue;
   font-size: 100%;
@@ -280,15 +239,15 @@ tab1
   padding-right: 4px;
 }
 
-#ayympwigio .gt_column_spanner_outer:first-child {
+#lciyvgxirb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ayympwigio .gt_column_spanner_outer:last-child {
+#lciyvgxirb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ayympwigio .gt_column_spanner {
+#lciyvgxirb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -300,7 +259,7 @@ tab1
   width: 100%;
 }
 
-#ayympwigio .gt_group_heading {
+#lciyvgxirb .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -322,7 +281,7 @@ tab1
   vertical-align: middle;
 }
 
-#ayympwigio .gt_empty_group_heading {
+#lciyvgxirb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -337,15 +296,15 @@ tab1
   vertical-align: middle;
 }
 
-#ayympwigio .gt_from_md > :first-child {
+#lciyvgxirb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ayympwigio .gt_from_md > :last-child {
+#lciyvgxirb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ayympwigio .gt_row {
+#lciyvgxirb .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -364,7 +323,7 @@ tab1
   overflow-x: hidden;
 }
 
-#ayympwigio .gt_stub {
+#lciyvgxirb .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -376,7 +335,7 @@ tab1
   padding-left: 12px;
 }
 
-#ayympwigio .gt_summary_row {
+#lciyvgxirb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -386,7 +345,7 @@ tab1
   padding-right: 5px;
 }
 
-#ayympwigio .gt_first_summary_row {
+#lciyvgxirb .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -396,7 +355,7 @@ tab1
   border-top-color: #D3D3D3;
 }
 
-#ayympwigio .gt_grand_summary_row {
+#lciyvgxirb .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -406,7 +365,7 @@ tab1
   padding-right: 5px;
 }
 
-#ayympwigio .gt_first_grand_summary_row {
+#lciyvgxirb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -416,11 +375,11 @@ tab1
   border-top-color: #D3D3D3;
 }
 
-#ayympwigio .gt_striped {
+#lciyvgxirb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ayympwigio .gt_table_body {
+#lciyvgxirb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -429,7 +388,7 @@ tab1
   border-bottom-color: #D3D3D3;
 }
 
-#ayympwigio .gt_footnotes {
+#lciyvgxirb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -443,13 +402,13 @@ tab1
   border-right-color: #D3D3D3;
 }
 
-#ayympwigio .gt_footnote {
+#lciyvgxirb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#ayympwigio .gt_sourcenotes {
+#lciyvgxirb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -463,46 +422,46 @@ tab1
   border-right-color: #D3D3D3;
 }
 
-#ayympwigio .gt_sourcenote {
+#lciyvgxirb .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#ayympwigio .gt_left {
+#lciyvgxirb .gt_left {
   text-align: left;
 }
 
-#ayympwigio .gt_center {
+#lciyvgxirb .gt_center {
   text-align: center;
 }
 
-#ayympwigio .gt_right {
+#lciyvgxirb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ayympwigio .gt_font_normal {
+#lciyvgxirb .gt_font_normal {
   font-weight: normal;
 }
 
-#ayympwigio .gt_font_bold {
+#lciyvgxirb .gt_font_bold {
   font-weight: bold;
 }
 
-#ayympwigio .gt_font_italic {
+#lciyvgxirb .gt_font_italic {
   font-style: italic;
 }
 
-#ayympwigio .gt_super {
+#lciyvgxirb .gt_super {
   font-size: 65%;
 }
 
-#ayympwigio .gt_footnote_marks {
+#lciyvgxirb .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="ayympwigio" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="lciyvgxirb" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   <thead class="gt_header">
     <tr>
       <th colspan="3" class="gt_heading gt_title gt_font_normal" style>Lisa's Garden Harvest Data</th>
@@ -4080,7 +4039,7 @@ tomato <- garden_harvestT %>%
 lettuce | tomato
 ```
 
-![](06_exercises_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
+![](06_exercises_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
 
   
   7. COMING SOON! Web scraping problem.
